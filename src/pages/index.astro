@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsCard from '../components/NewsCard.astro';
+
+const allNews = await getCollection('news');
+const latestNews = allNews
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const features = [
+  {
+    title: 'Curious Minds',
+    body: 'Inquiry-based learning across every grade, with hands-on projects that bring lessons to life.',
+    icon: '🔭',
+  },
+  {
+    title: 'Caring Community',
+    body: 'Small class sizes and a tight-knit staff make every child feel known and supported.',
+    icon: '🤝',
+  },
+  {
+    title: 'Creative Spirit',
+    body: 'Art, music, drama, and outdoor learning are woven through the school day, not bolted on.',
+    icon: '🎨',
+  },
+];
+---
+
+<BaseLayout title="Maple Grove Elementary">
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-cream-100 to-cream-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <p class="inline-block px-3 py-1 rounded-full bg-maple-100 text-maple-700 text-xs font-semibold uppercase tracking-wider mb-4">
+          Now enrolling for fall
+        </p>
+        <h1 class="font-display text-4xl sm:text-5xl md:text-6xl text-maple-800 leading-tight">
+          Where curiosity grows roots.
+        </h1>
+        <p class="text-lg text-gray-700 mt-6 leading-relaxed max-w-xl">
+          Maple Grove Elementary is a welcoming K&ndash;5 neighborhood school in Riverdale,
+          building joyful learners since 1958.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="/admissions"
+            class="inline-flex items-center px-5 py-3 rounded-full bg-maple-600 text-white font-semibold hover:bg-maple-700 transition-colors"
+          >
+            Start admissions
+          </a>
+          <a
+            href="/about"
+            class="inline-flex items-center px-5 py-3 rounded-full bg-white text-maple-700 border border-maple-200 font-semibold hover:bg-cream-100 transition-colors"
+          >
+            Meet our school
+          </a>
+        </div>
+      </div>
+      <div class="hidden md:block">
+        <div class="relative aspect-[4/3] rounded-3xl bg-maple-100 overflow-hidden shadow-lg">
+          <div class="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-2 p-4 opacity-90">
+            <div class="bg-maple-300 rounded-xl"></div>
+            <div class="bg-cream-200 rounded-xl col-span-2"></div>
+            <div class="bg-maple-500 rounded-xl row-span-2"></div>
+            <div class="bg-cream-100 rounded-xl col-span-2"></div>
+            <div class="bg-maple-200 rounded-xl col-span-2"></div>
+          </div>
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span class="font-display text-6xl text-maple-800/80">🍁</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+    <div class="grid md:grid-cols-3 gap-6">
+      {features.map((feature) => (
+        <div class="bg-white rounded-2xl border border-maple-100 p-6 shadow-sm">
+          <div class="text-3xl mb-3">{feature.icon}</div>
+          <h2 class="font-display text-xl text-gray-900 mb-2">{feature.title}</h2>
+          <p class="text-gray-600 leading-relaxed text-sm">{feature.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Latest news -->
+  <section class="bg-cream-100/60 border-y border-maple-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      <div class="flex items-end justify-between gap-4 mb-8">
+        <h2 class="font-display text-3xl text-gray-900">Latest news</h2>
+        <a href="/news" class="text-sm font-semibold text-maple-700 hover:text-maple-800">
+          See all news &rarr;
+        </a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {latestNews.map((post) => (
+          <NewsCard
+            href={`/news/${post.id}`}
+            title={post.data.title}
+            date={post.data.date}
+            summary={post.data.summary}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact strip -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-16 text-center">
+    <h2 class="font-display text-3xl text-gray-900 mb-3">Come visit us</h2>
+    <p class="text-gray-600 max-w-xl mx-auto mb-6">
+      Tours are available most weekday mornings during the school year. Reach out and we'll find a time that works.
+    </p>
+    <a
+      href="/contact"
+      class="inline-flex items-center px-5 py-3 rounded-full bg-maple-600 text-white font-semibold hover:bg-maple-700 transition-colors"
+    >
+      Contact the office
+    </a>
+  </section>
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  email?: string;
+  bio: string;
+}
+
+const { name, role, email, bio } = Astro.props;
+
+const initials = name
+  .split(' ')
+  .filter((part) => /^[A-Z]/.test(part))
+  .map((part) => part[0])
+  .slice(-2)
+  .join('');
+---
+
+<article class="bg-white rounded-2xl border border-maple-100 p-6 shadow-sm flex gap-4">
+  <div class="shrink-0">
+    <div class="w-16 h-16 rounded-full bg-maple-100 text-maple-700 flex items-center justify-center font-display text-xl">
+      {initials}
+    </div>
+  </div>
+  <div class="min-w-0">
+    <h3 class="font-display text-lg text-gray-900 leading-tight">{name}</h3>
+    <p class="text-sm text-maple-700 font-semibold mt-0.5">{role}</p>
+    <p class="text-sm text-gray-600 leading-relaxed mt-2">{bio}</p>
+    {email && (
+      <a href={`mailto:${email}`} class="inline-block mt-3 text-xs font-semibold text-maple-700 hover:text-maple-800">
+        {email}
+      </a>
+    )}
+  </div>
+</article>

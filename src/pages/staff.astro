@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StaffCard from '../components/StaffCard.astro';
+
+const staffEntries = await getCollection('staff');
+const sorted = staffEntries.sort((a, b) => a.data.order - b.data.order);
+
+// Render each entry's body to a plain string-ish bio (use raw body for simple text)
+const staffWithBio = sorted.map((entry) => ({
+  ...entry,
+  bio: entry.body?.trim() ?? '',
+}));
+---
+
+<BaseLayout title="Staff">
+  <section class="bg-cream-100/50 border-b border-maple-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+      <p class="text-xs uppercase tracking-widest text-maple-600 font-semibold">Our team</p>
+      <h1 class="font-display text-4xl sm:text-5xl text-maple-800 mt-3">Meet the people behind Maple Grove.</h1>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        Our teachers and staff are the heart of the school. Get to know a few of the folks
+        you'll see in the hallways, classrooms, and at the front desk.
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+    <div class="grid md:grid-cols-2 gap-6">
+      {staffWithBio.map((entry) => (
+        <StaffCard
+          name={entry.data.name}
+          role={entry.data.role}
+          email={entry.data.email}
+          bio={entry.bio}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

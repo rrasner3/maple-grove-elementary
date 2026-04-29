@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page not found">
+  <section class="max-w-2xl mx-auto px-4 sm:px-6 py-24 text-center">
+    <p class="font-display text-7xl text-maple-700">404</p>
+    <h1 class="font-display text-3xl text-gray-900 mt-4">We couldn't find that page.</h1>
+    <p class="text-gray-600 mt-3">
+      The page you're looking for might have moved or never existed. Try one of these instead:
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3 justify-center">
+      <a href="/" class="px-5 py-3 rounded-full bg-maple-600 text-white font-semibold hover:bg-maple-700 transition-colors">
+        Home
+      </a>
+      <a href="/news" class="px-5 py-3 rounded-full bg-white text-maple-700 border border-maple-200 font-semibold hover:bg-cream-100 transition-colors">
+        News
+      </a>
+      <a href="/contact" class="px-5 py-3 rounded-full bg-white text-maple-700 border border-maple-200 font-semibold hover:bg-cream-100 transition-colors">
+        Contact
+      </a>
+    </div>
+  </section>
+</BaseLayout>

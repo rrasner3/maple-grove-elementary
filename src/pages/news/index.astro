@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsCard from '../../components/NewsCard.astro';
+
+const allNews = await getCollection('news');
+const sorted = allNews.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<BaseLayout title="News">
+  <section class="bg-cream-100/50 border-b border-maple-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+      <p class="text-xs uppercase tracking-widest text-maple-600 font-semibold">School news</p>
+      <h1 class="font-display text-4xl sm:text-5xl text-maple-800 mt-3">Announcements &amp; updates.</h1>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        Stay in the loop on events, classroom highlights, and notes from the office.
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sorted.map((post) => (
+        <NewsCard
+          href={`/news/${post.id}`}
+          title={post.data.title}
+          date={post.data.date}
+          summary={post.data.summary}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

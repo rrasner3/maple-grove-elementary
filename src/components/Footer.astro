@@ -1,0 +1,36 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-maple-700 text-cream-50 mt-20">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid gap-10 md:grid-cols-3">
+    <div>
+      <h3 class="font-display text-xl mb-3">Maple Grove Elementary</h3>
+      <p class="text-sm leading-relaxed text-cream-100/90">
+        A welcoming neighborhood school where curiosity, kindness, and community grow together.
+      </p>
+    </div>
+    <div>
+      <h4 class="font-semibold uppercase tracking-wider text-xs text-cream-100/80 mb-3">Visit Us</h4>
+      <address class="not-italic text-sm leading-relaxed text-cream-100/90">
+        123 Maple Lane<br />
+        Riverdale, OR 97000<br />
+        (555) 010-0123
+      </address>
+    </div>
+    <div>
+      <h4 class="font-semibold uppercase tracking-wider text-xs text-cream-100/80 mb-3">Quick Links</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/admissions" class="hover:underline">Admissions</a></li>
+        <li><a href="/news" class="hover:underline">News &amp; Announcements</a></li>
+        <li><a href="/contact" class="hover:underline">Contact the Office</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-maple-600/60">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-xs text-cream-100/70 flex flex-col sm:flex-row gap-2 sm:justify-between">
+      <span>&copy; {year} Maple Grove Elementary. All rights reserved.</span>
+      <span>A demo site deployed on Cloudflare Workers.</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const values = [
+  { title: 'Belonging', body: 'Every child arrives knowing they have a place at Maple Grove.' },
+  { title: 'Curiosity', body: 'We protect time for questions, wonder, and exploration.' },
+  { title: 'Kindness', body: 'We practice care for one another in big and small ways every day.' },
+  { title: 'Excellence', body: 'We hold high expectations and meet students where they are.' },
+];
+---
+
+<BaseLayout title="About">
+  <section class="bg-cream-100/50 border-b border-maple-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+      <p class="text-xs uppercase tracking-widest text-maple-600 font-semibold">About our school</p>
+      <h1 class="font-display text-4xl sm:text-5xl text-maple-800 mt-3">A neighborhood school since 1958.</h1>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        Maple Grove Elementary serves about 320 students across kindergarten through fifth grade.
+        We sit on a quiet street in Riverdale, with a wooded play area, a small garden, and an
+        old red maple that students have been planting their hopes under for over six decades.
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+    <h2 class="font-display text-3xl text-gray-900 mb-4">Our mission</h2>
+    <p class="text-gray-700 leading-relaxed text-lg">
+      We grow joyful, curious, kind learners who are ready for whatever comes next &mdash; not just
+      academically, but as members of a community.
+    </p>
+  </section>
+
+  <section class="bg-white border-y border-maple-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+      <h2 class="font-display text-3xl text-gray-900 mb-8">What we value</h2>
+      <div class="grid sm:grid-cols-2 gap-6">
+        {values.map((value) => (
+          <div class="border-l-4 border-maple-400 pl-4">
+            <h3 class="font-display text-xl text-gray-900">{value.title}</h3>
+            <p class="text-gray-600 mt-1 leading-relaxed">{value.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+    <h2 class="font-display text-3xl text-gray-900 mb-4">By the numbers</h2>
+    <dl class="grid sm:grid-cols-3 gap-6 mt-6">
+      <div class="bg-cream-100 rounded-2xl p-6 text-center">
+        <dt class="text-xs uppercase tracking-widest text-maple-700 font-semibold">Students</dt>
+        <dd class="font-display text-4xl text-maple-800 mt-2">~320</dd>
+      </div>
+      <div class="bg-cream-100 rounded-2xl p-6 text-center">
+        <dt class="text-xs uppercase tracking-widest text-maple-700 font-semibold">Avg. class size</dt>
+        <dd class="font-display text-4xl text-maple-800 mt-2">21</dd>
+      </div>
+      <div class="bg-cream-100 rounded-2xl p-6 text-center">
+        <dt class="text-xs uppercase tracking-widest text-maple-700 font-semibold">Years strong</dt>
+        <dd class="font-display text-4xl text-maple-800 mt-2">68</dd>
+      </div>
+    </dl>
+  </section>
+</BaseLayout>

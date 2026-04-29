@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const steps = [
+  {
+    title: 'Tour the school',
+    body: 'Schedule a 45-minute visit with our admissions coordinator. You\'ll see classrooms in action and meet a teacher.',
+  },
+  {
+    title: 'Submit an application',
+    body: 'Complete the short online application and upload your child\'s most recent report card (if applicable).',
+  },
+  {
+    title: 'Family conversation',
+    body: 'We meet with each family to learn about your child and answer any questions you have.',
+  },
+  {
+    title: 'Welcome',
+    body: 'Decisions are sent within two weeks. Once enrolled, we host a "First Day Friends" meet-up before the term begins.',
+  },
+];
+
+const dates = [
+  { label: 'Fall enrollment opens', value: 'February 1' },
+  { label: 'Priority application deadline', value: 'March 15' },
+  { label: 'Family conversations', value: 'March – April' },
+  { label: 'First day of school', value: 'August 25' },
+];
+---
+
+<BaseLayout title="Admissions">
+  <section class="bg-cream-100/50 border-b border-maple-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+      <p class="text-xs uppercase tracking-widest text-maple-600 font-semibold">Admissions</p>
+      <h1 class="font-display text-4xl sm:text-5xl text-maple-800 mt-3">Joining the Maple Grove family.</h1>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        We accept applications for grades K&ndash;5 on a rolling basis, with priority given to
+        families who apply by March 15. Tours are the best way to get a feel for our school.
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+    <h2 class="font-display text-3xl text-gray-900 mb-8">How it works</h2>
+    <ol class="space-y-6">
+      {steps.map((step, idx) => (
+        <li class="flex gap-5 bg-white rounded-2xl border border-maple-100 p-6 shadow-sm">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-maple-600 text-white flex items-center justify-center font-display text-lg">
+            {idx + 1}
+          </div>
+          <div>
+            <h3 class="font-display text-xl text-gray-900">{step.title}</h3>
+            <p class="text-gray-600 mt-1 leading-relaxed">{step.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="bg-white border-y border-maple-100">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+      <h2 class="font-display text-3xl text-gray-900 mb-8">Key dates</h2>
+      <dl class="grid sm:grid-cols-2 gap-4">
+        {dates.map((d) => (
+          <div class="flex items-baseline justify-between gap-4 border-b border-maple-100 py-3">
+            <dt class="text-gray-700">{d.label}</dt>
+            <dd class="font-semibold text-maple-700">{d.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-16 text-center">
+    <h2 class="font-display text-3xl text-gray-900 mb-3">Ready to start?</h2>
+    <p class="text-gray-600 mb-6">
+      Get in touch and we'll set up a tour at a time that works for your family.
+    </p>
+    <a
+      href="/contact"
+      class="inline-flex items-center px-5 py-3 rounded-full bg-maple-600 text-white font-semibold hover:bg-maple-700 transition-colors"
+    >
+      Contact admissions
+    </a>
+  </section>
+</BaseLayout>

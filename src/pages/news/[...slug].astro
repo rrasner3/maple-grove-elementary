@@ -1,0 +1,91 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={post.data.title} description={post.data.summary}>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-16">
+    <a href="/news" class="text-sm font-semibold text-maple-700 hover:text-maple-800">
+      &larr; Back to news
+    </a>
+    <header class="mt-6 mb-10 border-b border-maple-100 pb-8">
+      <p class="text-xs uppercase tracking-widest text-maple-600 font-semibold">
+        {formattedDate} &middot; {post.data.author}
+      </p>
+      <h1 class="font-display text-4xl sm:text-5xl text-maple-800 mt-3 leading-tight">
+        {post.data.title}
+      </h1>
+      <p class="text-lg text-gray-700 leading-relaxed mt-4">{post.data.summary}</p>
+      {post.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-5">
+          {post.data.tags.map((tag) => (
+            <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-cream-100 text-maple-700">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+    <div class="prose-content text-gray-800 leading-relaxed space-y-4">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .prose-content h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: #1f2937;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-content h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: #1f2937;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose-content p {
+    margin-bottom: 1rem;
+  }
+  .prose-content ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .prose-content ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .prose-content li {
+    margin-bottom: 0.25rem;
+  }
+  .prose-content strong {
+    font-weight: 600;
+    color: #111827;
+  }
+  .prose-content a {
+    color: var(--color-maple-700);
+    text-decoration: underline;
+  }
+</style>
