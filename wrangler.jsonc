@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "maple-grove-elementary",
+  "account_id": "4c0c32a4516adad87b88703c9a89620f",
   "compatibility_date": "2026-04-29",
   "assets": {
     "directory": "./dist",
