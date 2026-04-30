@@ -1,0 +1,64 @@
+backend:
+  name: github
+  repo: rrasner3/maple-grove-elementary
+  branch: main
+  base_url: https://sveltia-cms-auth.rrasner3.workers.dev   # OAuth proxy (see README)
+  auth_endpoint: /auth
+
+# Where uploaded media files live
+media_folder: public/images
+public_folder: /images
+
+# Open editorial workflow = changes go through PRs first.
+# Set to "simple" if you'd rather have edits commit straight to main.
+publish_mode: editorial_workflow
+
+# Friendly site URL shown in the admin nav
+site_url: https://maple-grove-elementary.robert-4c0.workers.dev
+display_url: https://maple-grove-elementary.robert-4c0.workers.dev
+logo_url: https://maple-grove-elementary.robert-4c0.workers.dev/favicon.svg
+
+collections:
+  - name: news
+    label: News & Announcements
+    label_singular: Announcement
+    folder: src/content/news
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} — {{date | date('YYYY-MM-DD')}}"
+    sortable_fields: [date, title]
+    view_filters:
+      - label: Recent (last 90 days)
+        field: date
+        pattern: "2026"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Publish date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: false }
+      - { name: summary, label: Summary, widget: text, hint: "1–2 sentences shown on news cards." }
+      - { name: author, label: Author, widget: string, default: "Maple Grove Staff" }
+      - name: tags
+        label: Tags
+        widget: list
+        required: false
+        default: []
+        hint: "Optional. Common tags: community, events, academics, announcement."
+      - { name: body, label: Body, widget: markdown }
+
+  - name: staff
+    label: Staff
+    label_singular: Staff member
+    folder: src/content/staff
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{name}} — {{role}}"
+    sortable_fields: [order, name]
+    fields:
+      - { name: name, label: Full name, widget: string, hint: "e.g., 'Ms. Sofia Rivera'" }
+      - { name: role, label: Role / title, widget: string }
+      - { name: email, label: Email, widget: string, required: false, pattern: ['^\S+@\S+\.\S+$', 'Must be a valid email'] }
+      - { name: order, label: Display order, widget: number, value_type: int, default: 100, hint: "Lower numbers appear first. Principal=1, Vice Principal=2, teachers=10+." }
+      - { name: body, label: Bio, widget: markdown, hint: "Short paragraph (2–4 sentences)." }

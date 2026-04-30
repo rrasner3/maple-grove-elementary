@@ -61,6 +61,43 @@ npm run deploy
 
 After deploy you'll get a `https://maple-grove-elementary.<your-subdomain>.workers.dev` URL.
 
+## Web admin for non-technical editors
+
+A site manager can edit content without ever touching code at:
+
+> **https://maple-grove-elementary.robert-4c0.workers.dev/admin/**
+
+This is a [Sveltia CMS](https://github.com/sveltia/sveltia-cms) frontend
+configured against the GitHub repo. Every edit becomes a git commit (or pull request,
+when editorial workflow is on), so the developer + emdash workflow stays intact.
+
+### How it works
+
+```
+  Editor (browser)
+       │  log in with GitHub
+       ▼
+  /admin/  ──▶  sveltia-cms-auth Worker  ──▶  GitHub OAuth
+       │                                        │
+       │  ◀── access token ─────────────────────┘
+       │
+       ├── reads/writes Markdown via GitHub Contents API
+       └── commits land on `main`  ──▶  Cloudflare Workers Builds  ──▶  redeploy
+```
+
+### One-time auth setup
+
+1. **Create a GitHub OAuth App** at https://github.com/settings/developers
+   - Homepage URL: site URL
+   - Authorization callback URL: `https://sveltia-cms-auth.robert-4c0.workers.dev/callback`
+   - Device Flow: leave **disabled** (we use the standard web flow)
+2. **Deploy the auth Worker** (see `../sveltia-cms-auth/`) and set its secrets:
+   ```sh
+   npx wrangler secret put GITHUB_CLIENT_ID
+   npx wrangler secret put GITHUB_CLIENT_SECRET
+   ```
+3. **Add editors** as collaborators on the GitHub repo (read+write access).
+
 ## Suggested emdash demo edits
 
 Each makes a focused, visible change:
