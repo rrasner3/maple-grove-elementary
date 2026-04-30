@@ -1,0 +1,23 @@
+public/admin/index.html
+  171d1b6a5ba74f0e 11-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8",
+  "base_commit_sha": "d7aee55644eb2b5b119c9bb51dd8778434effbd6",
+  "prompts": {
+    "171d1b6a5ba74f0e": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_225359d57ffeuCtVbAXrX6kZ73",
+        "model": "anthropic/claude-opus-4-7"
+      },
+      "human_author": "Robert Rasner",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 2,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    }
+  }
+}
