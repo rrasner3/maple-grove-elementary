@@ -1,0 +1,23 @@
+src/pages/index.astro
+  171d1b6a5ba74f0e 39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8",
+  "base_commit_sha": "4f7e22f14496fb908611fec8f7250e06ea5110ba",
+  "prompts": {
+    "171d1b6a5ba74f0e": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_225359d57ffeuCtVbAXrX6kZ73",
+        "model": "anthropic/claude-opus-4-7"
+      },
+      "human_author": "Robert Rasner",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
