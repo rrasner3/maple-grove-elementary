@@ -9,9 +9,9 @@ backend:
 media_folder: public/images
 public_folder: /images
 
-# Open editorial workflow = changes go through PRs first.
-# Set to "simple" if you'd rather have edits commit straight to main.
-publish_mode: editorial_workflow
+# "simple" = edits commit straight to main on Save (one-click publish).
+# Switch to "editorial_workflow" if you want a draft -> review -> publish pipeline.
+publish_mode: simple
 
 # Friendly site URL shown in the admin nav
 site_url: https://maple-grove-elementary.robert-4c0.workers.dev
