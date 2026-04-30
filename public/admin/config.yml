@@ -2,7 +2,7 @@ backend:
   name: github
   repo: rrasner3/maple-grove-elementary
   branch: main
-  base_url: https://sveltia-cms-auth.rrasner3.workers.dev   # OAuth proxy (see README)
+  base_url: https://sveltia-cms-auth.robert-4c0.workers.dev   # OAuth proxy (see README)
   auth_endpoint: /auth
 
 # Where uploaded media files live
